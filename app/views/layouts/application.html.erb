@@ -41,6 +41,30 @@ http://stackoverflow.com/questions/12769863/slickgrid-with-zurb-foundation
   </head>
 
   <body>
+  <nav class="top-bar">
+  <ul class="title-area">
+    <li class="name"><h1><a href="/">Hacks</a></h1></li>
+    <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  </ul>
+  <section class="top-bar-section">
+    <!-- Right Nav Section -->
+    <ul class="right">
+      <li class=""><%= link_to 'Hack members', hack_members_path %></li>
+      <li class=""><%= link_to 'Venues', hack_venues_path %></li>
+      <li class="has-dropdown not-click">
+      <a href="#">Example</a>
+      <ul class="dropdown"><li class="title back js-generated"><h5><a href="#">« Back</a></h5></li>
+        <li class=""><a href="http://patterntap.com">Pattern Tap</a></li>
+        <li class=""><a href="http://www.zurb.com/word">Word</a></li>
+        <li class=""><a href="http://www.zurb.com/responsive">Responsive</a></li>
+        <li class=""><a href="http://www.zurb.com/playground">Playground</a></li>
+        <li class=""><a href="http://www.zurb.com/quips">Quips</a></li>
+      </ul>
+      </li>
+    </ul>
+  </section>
+</nav>
 
     <%= yield %>
 

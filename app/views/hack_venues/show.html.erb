@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Venue:</strong>
+  <%= @hack_venue.venue %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @hack_venue.notes %>
+</p>
+
+<%= link_to 'Edit', edit_hack_venue_path(@hack_venue) %> |
+<%= link_to 'Back', hack_venues_path %>

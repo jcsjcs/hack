@@ -1,4 +1,6 @@
 Hack::Application.routes.draw do
+  resources :hack_venues
+
   resources :hack_members
 
   # The priority is based upon order of creation: first created -> highest priority.

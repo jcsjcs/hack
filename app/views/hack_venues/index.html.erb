@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="large-12 columns">
+<h1>Hack venues</h1>
+</div>
+</div>
+
+<div class="row">
+  <div class="large-12 columns">
+<%= link_to 'New Hack venue', new_hack_venue_path, :class => 'button' %>
+</div>
+</div>
+
+<div class="row">
+  <div class="large-12 columns">
+<table>
+  <thead>
+    <tr>
+      <th>Venue</th>
+      <th>Notes</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @hack_venues.each do |hack_venue| %>
+      <tr>
+        <td><%= hack_venue.venue %></td>
+        <td><%= hack_venue.notes %></td>
+        <td><%= link_to 'Show', hack_venue %></td>
+        <td><%= link_to 'Edit', edit_hack_venue_path(hack_venue) %></td>
+        <td><%= link_to 'Destroy', hack_venue, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+</div>
