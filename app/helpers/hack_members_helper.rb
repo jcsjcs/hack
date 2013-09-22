@@ -1,0 +1,2 @@
+module HackMembersHelper
+end

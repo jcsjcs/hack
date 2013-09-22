@@ -18,6 +18,26 @@
   	<%= stylesheet_link_tag    "application" %>
   	<%= javascript_include_tag "vendor/custom.modernizr" %>
     <%= csrf_meta_tags %>
+    <style>
+/* Make SlickGrid compatible with Zurb Foundation css:
+http://stackoverflow.com/questions/12769863/slickgrid-with-zurb-foundation
+(possibly not required once SG updated - issue #699)
+ */
+      #myGrid * {
+        -moz-box-sizing: content-box;
+        -webkit-box-sizing: content-box;
+        box-sizing: content-box;
+      }
+      #myGrid [class*="column"]:last-child {
+        float: none;
+      }
+      /* For Firefox */
+      .slick-header-column {
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+      }
+    </style>
   </head>
 
   <body>
@@ -26,5 +46,6 @@
 
     
     <%= javascript_include_tag "application" %>
+    <%= content_for :late_js %>
   </body>
 </html>

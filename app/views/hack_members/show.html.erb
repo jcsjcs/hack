@@ -1,0 +1,79 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @hack_member.title %>
+</p>
+
+<p>
+  <strong>Initials:</strong>
+  <%= @hack_member.initials %>
+</p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @hack_member.first_name %>
+</p>
+
+<p>
+  <strong>Surname:</strong>
+  <%= @hack_member.surname %>
+</p>
+
+<p>
+  <strong>Tel home:</strong>
+  <%= @hack_member.tel_home %>
+</p>
+
+<p>
+  <strong>Tel office:</strong>
+  <%= @hack_member.tel_office %>
+</p>
+
+<p>
+  <strong>Tel cell:</strong>
+  <%= @hack_member.tel_cell %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @hack_member.email %>
+</p>
+
+<p>
+  <strong>Email ok:</strong>
+  <%= @hack_member.email_ok %>
+</p>
+
+<p>
+  <strong>Email issues:</strong>
+  <%= @hack_member.email_issues %>
+</p>
+
+<p>
+  <strong>Non hacker:</strong>
+  <%= @hack_member.non_hacker %>
+</p>
+
+<p>
+  <strong>Comments:</strong>
+  <%= @hack_member.comments %>
+</p>
+
+<p>
+  <strong>Contact via:</strong>
+  <%= @hack_member.contact_via %>
+</p>
+
+<p>
+  <strong>Group with:</strong>
+  <%= @hack_member.group_with %>
+</p>
+
+<p>
+  <strong>Hack attendances count:</strong>
+  <%= @hack_member.hack_attendances_count %>
+</p>
+
+<%= link_to 'Edit', edit_hack_member_path(@hack_member), :class => 'button' %> |
+<%= link_to 'Back', hack_members_path, :class => 'button' %>
