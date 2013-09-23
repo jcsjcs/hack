@@ -10,6 +10,9 @@
     <%= link_to 'New Hack member', new_hack_member_path, :class => 'button' %>
   </div>
   <div class="large-4 columns">
+    <%= link_to 'Download excel file', hack_members_path(:format => :xlsx), :class => 'button secondary' %>
+  </div>
+  <div class="large-4 columns">
     <div class="row collapse">
       <div class="large-10 columns">
         <input type=search id="txtSearch" placeholder="Search...">

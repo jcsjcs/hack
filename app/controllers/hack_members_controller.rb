@@ -4,11 +4,18 @@ class HackMembersController < ApplicationController
   # GET /hack_members
   # GET /hack_members.json
   def index
-    @hack_members = []
-    hack_members = []
-    HackMember.all.each {|r| hack_members << r.to_grid_row }
-    @grid_columns = HackMember.grid_columns.to_json
-    @grid_data    = hack_members.to_json
+    respond_to do |format|
+      format.html do
+        hack_members = []
+        HackMember.all.each {|r| hack_members << r.to_grid_row }
+        @grid_columns = HackMember.grid_columns.to_json
+        @grid_data    = hack_members.to_json
+      end
+      format.xlsx do
+        @hack_members = HackMember.hack_seq
+      end
+    end
+#    @hack_members = []
     #logger.info ">>> #{@grid_columns}"
   end
 

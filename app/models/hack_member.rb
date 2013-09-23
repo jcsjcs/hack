@@ -2,13 +2,9 @@ class HackMember < ActiveRecord::Base
   has_many :hack_attendances
   has_many :hack_meets, :through => :hack_attendances
   
-  # named_scope :hack_seq, :order => 'hack_attendances_count > 0 DESC, non_hacker, UPPER(surname), first_name'
   scope :hack_seq, -> {order('hack_attendances_count > 0 DESC, non_hacker, UPPER(surname), first_name') }
-  # named_scope :hack_seq_desc, :order => 'hack_attendances_count > 0, non_hacker DESC, UPPER(surname) DESC, first_name DESC'
   scope :hack_seq_desc, -> {order('hack_attendances_count > 0, non_hacker DESC, UPPER(surname) DESC, first_name DESC') }
-  # named_scope :name_seq, :order => 'UPPER(surname), first_name'
   scope :name_seq, -> {order('UPPER(surname), first_name') }
-  # named_scope :name_seq_desc, :order => 'UPPER(surname) DESC, first_name DESC'
   scope :name_seq_desc, -> {order('UPPER(surname) DESC, first_name DESC') }
 
   validates_presence_of :surname

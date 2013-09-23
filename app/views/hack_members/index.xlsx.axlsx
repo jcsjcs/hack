@@ -1,0 +1,11 @@
+wb = xlsx_package.workbook
+tbl_header = wb.styles.add_style :b => true, :alignment => {:horizontal => :center}
+wb.add_worksheet(name: "Hack") do |sheet|
+  sheet.add_row ["Name", "Hacks", "Email", "Tel nos"], :style => tbl_header
+  @hack_members.each do |hack_member|
+    sheet.add_row [hack_member.full_name,
+         hack_member.hack_attendances_count > 0 ? hack_member.hack_attendances_count : nil,
+         hack_member.email,
+         hack_member.combined_phone_nos( true )], :style => Axlsx::STYLE_THIN_BORDER
+  end
+end

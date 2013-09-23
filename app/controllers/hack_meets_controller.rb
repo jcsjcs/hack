@@ -1,10 +1,11 @@
 class HackMeetsController < ApplicationController
-  before_action :set_hack_meet, only: [:show, :edit, :update, :destroy]
+  before_action :set_hack_meet, only: [:show, :edit, :update, :destroy,
+                                       :attendance, :update_attendance]
 
   # GET /hack_meets
   # GET /hack_meets.json
   def index
-    @hack_meets = HackMeet.all
+    @hack_meets = HackMeet.order('hack_year DESC, hack_month DESC').all
   end
 
   # GET /hack_meets/1
@@ -28,7 +29,7 @@ class HackMeetsController < ApplicationController
 
     respond_to do |format|
       if @hack_meet.save
-        format.html { redirect_to @hack_meet, notice: 'Hack meet was successfully created.' }
+        format.html { redirect_to hack_meets_url, notice: 'Hack meet was successfully created.' }
         format.json { render action: 'show', status: :created, location: @hack_meet }
       else
         format.html { render action: 'new' }
@@ -62,16 +63,11 @@ class HackMeetsController < ApplicationController
   end
 
   def attendance
-    @hack_meet = HackMeet.find(params[:id])
     @attended = @hack_meet.hack_attendances.all.map{|a| a.hack_member_id}
-    # show with flag of regular atendance (> 5 hacks)
-#    @hack_members = HackMember.all(:order => 'hack_attendances_count > 0 DESC, surname, first_name')
     @hack_members = HackMember.hack_seq
-    # (Also show if already marked as attending)
   end
 
   def update_attendance
-    @hack_meet = HackMeet.find(params[:id])
     member_ids = params[:attendance_ids]
     # Remove all attendances for this hack
     # Then add all checked members
