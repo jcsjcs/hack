@@ -1,3 +1,11 @@
+<div class="row">
+  <div class="large-12 columns">
+    <h1>Hack venue</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-12 columns">
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -9,6 +17,12 @@
   <strong>Notes:</strong>
   <%= @hack_venue.notes %>
 </p>
+  </div>
+</div>
 
-<%= link_to 'Edit', edit_hack_venue_path(@hack_venue) %> |
-<%= link_to 'Back', hack_venues_path %>
+<div class="row">
+  <div class="large-12 columns">
+    <%= link_to 'Edit', edit_hack_venue_path(@hack_venue), :class => 'button' %> |
+    <%= link_to 'Back', hack_venues_path, :class => 'button' %>
+</div>
+</div>

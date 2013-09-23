@@ -1,3 +1,11 @@
+<div class="row">
+  <div class="large-12 columns">
+    <h1>Hack member</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-12 columns">
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -74,6 +82,12 @@
   <strong>Hack attendances count:</strong>
   <%= @hack_member.hack_attendances_count %>
 </p>
+  </div>
+</div>
 
+<div class="row">
+  <div class="large-12 columns">
 <%= link_to 'Edit', edit_hack_member_path(@hack_member), :class => 'button' %> |
 <%= link_to 'Back', hack_members_path, :class => 'button' %>
+</div>
+</div>
