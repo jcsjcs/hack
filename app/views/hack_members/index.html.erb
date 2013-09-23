@@ -74,8 +74,7 @@
 
   <div class="row">
     <div class="large-12 columns">
-      <!--div id="myGrid" style="width:100%;height:300px;"></div-->
-      <div id="myGrid" style="width:100%;height:300px;"></div>
+      <div id="myGrid" style="height:300px;"></div>
     </div>
   </div>
 
@@ -116,23 +115,6 @@
   var selectedIds = [];
 
   $(function () {
-    // for (var i = 0; i < 100; i++) {
-    //   var d = (data[i] = {});
-    //   d['id'] = i + 1;
-    //   d[0] = "Row " + i;
-    // }
-
-    // columns.push({id: 'id', name: 'id', field: 'id'});
-
-    // for (var i = 0; i < 5; i++) {
-    //   columns.push({
-    //     id: i,
-    //     name: String.fromCharCode("A".charCodeAt(0) + i),
-    //     field: i,
-    //     width: 100,
-    //   });
-    // }
-
     // initialize the model
     dataView = new Slick.Data.DataView({ inlineFilters: true });
     dataView.beginUpdate();
@@ -168,6 +150,14 @@
 
       searchString = this.value;
       dataView.refresh();
+    });
+
+    $("#txtSearch").on('search', function () {
+      // clear on [x] clicked in search box
+        if (this.value === "") {
+        searchString = this.value;
+        dataView.refresh();
+      }
     });
 
   function myFilter(item, args) {
