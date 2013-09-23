@@ -1,53 +1,87 @@
-<%= form_for(@hack_meet) do |f| %>
-  <% if @hack_meet.errors.any? %>
-    <div id="error_explanation">
+<div class="row">
+  <div class="large-12 columns">
+    <%= form_for(@hack_meet) do |f| %>
+      <% if @hack_meet.errors.any? %>
+      <div id="error_explanation">
       <h2><%= pluralize(@hack_meet.errors.count, "error") %> prohibited this hack_meet from being saved:</h2>
 
       <ul>
-      <% @hack_meet.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+        <% @hack_meet.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :hack_year %><br>
-    <%= f.number_field :hack_year %>
+    <div class="row">
+      <div class="large-3 columns">
+        <div class="field">
+          <%= f.label :hack_date %><br>
+          <span class="date">
+            <%= f.date_select :hack_date %>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-2 columns">
+        <div class="field">
+          <%= f.label :start_time %><br>
+          <%= f.text_field :start_time %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-6 columns">
+        <div class="field">
+          <%= f.label :work_area %><br>
+          <%= f.text_field :work_area %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-6 columns">
+        <div class="field">
+          <%= f.label :notes %><br>
+          <%= f.text_area :notes %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-6 columns">
+        <div class="field">
+          <%= f.label :hack_venue %><br>
+          <%= f.collection_select(:hack_venue_id, HackVenue.all(:order => 'venue'), :id, :venue) %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-6 columns">
+        <div class="field">
+          <%= f.label :social %><br>
+          <%= f.check_box :social %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-6 columns">
+  <% PlantType.order('name').each do |plant_type| %>
+    <div class="field">
+      <label>
+        <%= check_box_tag( 'hack_meet[plant_type_ids][]', plant_type.id,
+                          @hack_meet.plant_type_ids.include?(plant_type.id)) %>
+      <%= plant_type.name %>
+      </label>
+    </div>
+  <% end %>
+      </div>
+    </div>
+
+
+    <div class="actions">
+      <%= f.submit :class => 'button' %>
+    </div>
+  <% end %>
   </div>
-  <div class="field">
-    <%= f.label :hack_month %><br>
-    <%= f.number_field :hack_month %>
-  </div>
-  <div class="field">
-    <%= f.label :hack_date %><br>
-    <%= f.date_select :hack_date %>
-  </div>
-  <div class="field">
-    <%= f.label :start_time %><br>
-    <%= f.text_field :start_time %>
-  </div>
-  <div class="field">
-    <%= f.label :work_area %><br>
-    <%= f.text_field :work_area %>
-  </div>
-  <div class="field">
-    <%= f.label :notes %><br>
-    <%= f.text_area :notes %>
-  </div>
-  <div class="field">
-    <%= f.label :hack_venue %><br>
-    <%= f.collection_select(:hack_venue_id, HackVenue.all(:order => 'venue'), :id, :venue) %>
-  </div>
-  <div class="field">
-    <%= f.label :social %><br>
-    <%= f.check_box :social %>
-  </div>
-  <div class="field">
-    <%= f.label :hack_attendances_count %><br>
-    <%= f.number_field :hack_attendances_count %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

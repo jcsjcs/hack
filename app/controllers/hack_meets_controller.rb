@@ -94,6 +94,6 @@ class HackMeetsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hack_meet_params
-      params.require(:hack_meet).permit(:hack_year, :hack_month, :hack_date, :start_time, :work_area, :notes, :hack_venue_id, :social, :hack_attendances_count)
+      params.require(:hack_meet).permit(:hack_year, :hack_month, :hack_date, :start_time, :work_area, :notes, :hack_venue_id, :social, :hack_attendances_count, :plant_type_ids => [])
     end
 end

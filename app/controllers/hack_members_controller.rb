@@ -15,6 +15,7 @@ class HackMembersController < ApplicationController
   # GET /hack_members/1
   # GET /hack_members/1.json
   def show
+    @hack_meets  = @hack_member.hack_meets
   end
 
   # GET /hack_members/new

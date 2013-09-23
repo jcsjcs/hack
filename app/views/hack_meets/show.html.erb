@@ -1,14 +1,12 @@
+<div class="row">
+  <div class="large-12 columns">
+    <h1>Hack <%= hack_desc @hack_meet.hack_year, @hack_meet.hack_month %></h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-12 columns">
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Hack year:</strong>
-  <%= @hack_meet.hack_year %>
-</p>
-
-<p>
-  <strong>Hack month:</strong>
-  <%= @hack_meet.hack_month %>
-</p>
 
 <p>
   <strong>Hack date:</strong>
@@ -27,7 +25,7 @@
 
 <p>
   <strong>Notes:</strong>
-  <%= @hack_meet.notes %>
+  <%= simple_format @hack_meet.notes %>
 </p>
 
 <p>
@@ -44,6 +42,29 @@
   <strong>Hack attendances count:</strong>
   <%= @hack_meet.hack_attendances_count %>
 </p>
+<p>
+<strong>List of plants:</strong>
+<%= @hack_meet.plant_list %>
+</p>
 
-<%= link_to 'Edit', edit_hack_meet_path(@hack_meet) %> |
-<%= link_to 'Back', hack_meets_path %>
+<p>
+<strong>Attended by:</strong>
+<%= @hack_meet.hack_attendances_count %>
+<% @hack_meet.hack_members.hack_seq.each do |hack_member| -%>
+  <%= link_to hack_member.full_name, hack_member_path(hack_member) %><br />
+<% end -%>
+</p>
+<p>
+<strong>Newsletter list of names:</strong>
+<%= @hack_meet.hack_members_for_newsletter %>
+</p>
+
+</div>
+</div>
+
+<div class="row">
+  <div class="large-12 columns">
+    <%= link_to 'Edit', edit_hack_meet_path(@hack_meet), :class => 'button' %> |
+    <%= link_to 'Back', hack_meets_path, :class => 'button' %>
+  </div>
+</div>

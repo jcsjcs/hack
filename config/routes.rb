@@ -1,5 +1,7 @@
 Hack::Application.routes.draw do
 
+  get "home/welcome"
+
   resources :hack_meets do
     member do
       get 'attendance'
@@ -18,7 +20,7 @@ Hack::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'hack_members#index'
+  root 'home#welcome'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

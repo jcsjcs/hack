@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="large-12 columns">
+    <h1>Helderberg Nature Reserve Hacks</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-7 columns">
+      <div class="panel callout">
+    <div class="row">
+        <div class="large-8 push-4 columns">
+          <table>
+            <thead>
+              <tr>
+                <th colspan="2" class="centred">Members</th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>Total Members</td><td class="numeric"><%= @active_hackers+@inactive_hackers %></td>
+            </tr>
+            <tr>
+              <td>Active hackers</td><td class="numeric"><%= @active_hackers %></td>
+            </tr>
+            <tr>
+              <td>Inactive hackers</td><td class="numeric"><%= @inactive_hackers %></td>
+            </tr>
+            </tbody>
+            <thead>
+              <tr>
+                <th colspan="2" class="centred">Hacks</th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>No of hacks</td><td class="numeric"><%= @hack_count %></td>
+            </tr>
+            <tr>
+              <td>Since</td><td class="numeric"><%= @hack_since.strftime('%d %B %Y') %></td>
+            </tr>
+            <tr>
+              <td>Total attendance</td><td class="numeric"><%= @hack_attendance_count %></td>
+            </tr>
+            <tr>
+              <td>Average attendance</td><td class="numeric"><%= @hack_count.zero? ? 0 : sprintf("%.2f", @hack_attendance_count / @hack_count.to_f) %></td>
+            </tr>
+            <tr>
+              <td>Cancelled hacks</td><td class="numeric"><%= @hack_cancelled_count %></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="large-4 pull-8 columns">
+          <%= image_tag 'friends_logo.png' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

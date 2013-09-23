@@ -82,6 +82,14 @@
   <strong>Hack attendances count:</strong>
   <%= @hack_member.hack_attendances_count %>
 </p>
+<hr />
+<% if @hack_member.hack_attendances_count > 0 %>
+  <h2>Hacked on..</h2>
+  <% @hack_meets.each do |hack_meet| %>
+    <%= link_to hack_meet.hack_date, hack_meet %><br />
+  <% end -%>
+<% end -%>
+
   </div>
 </div>
 
