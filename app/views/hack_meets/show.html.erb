@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Hack year:</strong>
+  <%= @hack_meet.hack_year %>
+</p>
+
+<p>
+  <strong>Hack month:</strong>
+  <%= @hack_meet.hack_month %>
+</p>
+
+<p>
+  <strong>Hack date:</strong>
+  <%= @hack_meet.hack_date %>
+</p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @hack_meet.start_time %>
+</p>
+
+<p>
+  <strong>Work area:</strong>
+  <%= @hack_meet.work_area %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @hack_meet.notes %>
+</p>
+
+<p>
+  <strong>Hack venue:</strong>
+  <%= @hack_meet.hack_venue %>
+</p>
+
+<p>
+  <strong>Social:</strong>
+  <%= @hack_meet.social %>
+</p>
+
+<p>
+  <strong>Hack attendances count:</strong>
+  <%= @hack_meet.hack_attendances_count %>
+</p>
+
+<%= link_to 'Edit', edit_hack_meet_path(@hack_meet) %> |
+<%= link_to 'Back', hack_meets_path %>

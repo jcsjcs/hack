@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  hack_year: 1
+  hack_month: 1
+  hack_date: 2013-09-23
+  start_time: MyString
+  work_area: MyString
+  notes: MyText
+  hack_venue_id: 
+  social: false
+  hack_attendances_count: 1
+
+two:
+  hack_year: 1
+  hack_month: 1
+  hack_date: 2013-09-23
+  start_time: MyString
+  work_area: MyString
+  notes: MyText
+  hack_venue_id: 
+  social: false
+  hack_attendances_count: 1

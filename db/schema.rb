@@ -11,7 +11,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130923104724) do
+ActiveRecord::Schema.define(version: 20130923113333) do
+
+  create_table "hack_attendances", force: true do |t|
+    t.integer  "hack_meet_id"
+    t.integer  "hack_member_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "hack_attendances", ["hack_meet_id"], name: "index_hack_attendances_on_hack_meet_id", using: :btree
+  add_index "hack_attendances", ["hack_member_id"], name: "index_hack_attendances_on_hack_member_id", using: :btree
+
+  create_table "hack_meets", force: true do |t|
+    t.integer  "hack_year",                               null: false
+    t.integer  "hack_month",                              null: false
+    t.date     "hack_date",                               null: false
+    t.string   "start_time",             default: "8:00", null: false
+    t.string   "work_area"
+    t.text     "notes"
+    t.integer  "hack_venue_id",                           null: false
+    t.boolean  "social",                 default: false
+    t.integer  "hack_attendances_count", default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "hack_meets", ["hack_venue_id"], name: "index_hack_meets_on_hack_venue_id", using: :btree
+
+  create_table "hack_meets_plant_types", id: false, force: true do |t|
+    t.integer "hack_meet_id",  null: false
+    t.integer "plant_type_id", null: false
+  end
+
+  add_index "hack_meets_plant_types", ["plant_type_id", "hack_meet_id"], name: "index_hack_meets_plant_types_on_plant_type_id_and_hack_meet_id", unique: true, using: :btree
 
   create_table "hack_members", force: true do |t|
     t.string   "title"

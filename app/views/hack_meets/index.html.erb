@@ -1,0 +1,44 @@
+<h1>Listing hack_meets</h1>
+
+<table>
+  <thead>
+    <tr>
+    <th>Year: Month</th>
+    <th>Date</th>
+    <th>Attendance</th>
+      <th>Start time</th>
+      <th>Work area</th>
+      <th>Notes</th>
+      <th>Hack venue</th>
+      <th>Social</th>
+      <th>Hack attendances count</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @hack_meets.each do |hack_meet| %>
+      <tr>
+    <td><%= link_to hack_desc( hack_meet.hack_year, hack_meet.hack_month), hack_meet %></td>
+    <td><%= hack_meet.hack_date.strftime('%d %B %Y') %></td>
+    <td align="right"><%= hack_meet.hack_attendances_count %> <%= link_to 'Change', attendance_hack_meet_path(hack_meet), :class => 'icon icon-edit' %></td>
+
+        <td><%= hack_meet.start_time %></td>
+        <td><%= hack_meet.work_area %></td>
+        <td><%= hack_meet.notes %></td>
+        <td><%= hack_meet.hack_venue %></td>
+        <td><%= hack_meet.social %></td>
+        <td><%= hack_meet.hack_attendances_count %></td>
+        <td><%= link_to 'Show', hack_meet %></td>
+        <td><%= link_to 'Edit', edit_hack_meet_path(hack_meet) %></td>
+        <td><%= link_to 'Destroy', hack_meet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Hack meet', new_hack_meet_path %>

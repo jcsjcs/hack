@@ -1,4 +1,13 @@
 Hack::Application.routes.draw do
+
+  resources :hack_meets do
+    member do
+      get 'attendance'
+      post 'update_attendance'
+    end
+  end
+
+
   resources :plant_types
 
   resources :hack_venues

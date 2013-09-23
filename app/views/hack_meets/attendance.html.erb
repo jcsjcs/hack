@@ -1,0 +1,26 @@
+<h2>Attendance at hack <%= hack_desc @hack_meet.hack_year, @hack_meet.hack_month %></h2>
+
+  <%= link_to "Held on #{@hack_meet.hack_date.strftime('%d/%m/%Y')}", @hack_meet %>
+  at <%= @hack_meet.hack_venue.venue %>.
+  <% if @hack_meet.social -%>Social was held after the hack.<% end -%>
+    <p>Attendance count: <%= @hack_meet.hack_attendances_count %></p>
+
+<%= form_for(:hack_meet, :url => update_attendance_hack_meet_path(@hack_meet)) do |f| %>
+  <div style="height:400px;overflow:scroll;overflow-x:hidden; border: thin solid gray" >
+    <% @hack_members.each do |hack_member| -%>
+      <label>
+      <%= check_box_tag( 'attendance_ids[]', hack_member.id, @attended.include?(hack_member.id)) %>
+      <%= hack_member.full_name %>
+      <% if hack_member.hack_attendances_count > 0 -%>
+        (<%= hack_member.hack_attendances_count %>)
+      <% end -%>
+      </label>
+      <br />
+    <% end -%>
+  </div>
+  <br />
+  <%= submit_tag %>
+<% end -%>
+
+<%= link_to 'Back', hack_meets_path %>
+
