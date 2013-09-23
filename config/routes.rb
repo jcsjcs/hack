@@ -1,4 +1,6 @@
 Hack::Application.routes.draw do
+  resources :plant_types
+
   resources :hack_venues
 
   resources :hack_members

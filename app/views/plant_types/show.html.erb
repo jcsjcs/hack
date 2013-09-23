@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="large-12 columns">
+    <h1>Plant type</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-12 columns">
+    <p id="notice"><%= notice %></p>
+
+    <p>
+    <strong>Name:</strong>
+    <%= @plant_type.name %>
+    </p>
+
+    <p>
+    <strong>Notes:</strong>
+    <%= @plant_type.notes %>
+    </p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-12 columns">
+    <%= link_to 'Edit', edit_plant_type_path(@hack_venue), :class => 'button' %> |
+    <%= link_to 'Back', plant_types_path, :class => 'button' %>
+  </div>
+</div>

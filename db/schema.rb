@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130922171446) do
+ActiveRecord::Schema.define(version: 20130923104724) do
 
   create_table "hack_members", force: true do |t|
     t.string   "title"
@@ -36,6 +36,13 @@ ActiveRecord::Schema.define(version: 20130922171446) do
 
   create_table "hack_venues", force: true do |t|
     t.string   "venue"
+    t.text     "notes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "plant_types", force: true do |t|
+    t.string   "name",       null: false
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"

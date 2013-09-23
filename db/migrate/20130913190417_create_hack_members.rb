@@ -4,7 +4,7 @@ class CreateHackMembers < ActiveRecord::Migration
       t.string :title
       t.string :initials
       t.string :first_name
-      t.string :surname
+      t.string :surname, :null => false
       t.string :tel_home
       t.string :tel_office
       t.string :tel_cell
