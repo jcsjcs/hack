@@ -1,101 +1,83 @@
 <div class="row">
   <div class="large-12 columns">
-    <h1>Hack member</h1>
+    <h1><%= @hack_member.full_name %></h1>
   </div>
 </div>
 
 <div class="row">
   <div class="large-12 columns">
-<p id="notice"><%= notice %></p>
+    <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @hack_member.title %>
-</p>
+    <p>
+    <strong>Tel home:</strong>
+    <%= @hack_member.tel_home %>
+    </p>
 
-<p>
-  <strong>Initials:</strong>
-  <%= @hack_member.initials %>
-</p>
+    <p>
+    <strong>Tel office:</strong>
+    <%= @hack_member.tel_office %>
+    </p>
 
-<p>
-  <strong>First name:</strong>
-  <%= @hack_member.first_name %>
-</p>
+    <p>
+    <strong>Tel cell:</strong>
+    <%= @hack_member.tel_cell %>
+    </p>
 
-<p>
-  <strong>Surname:</strong>
-  <%= @hack_member.surname %>
-</p>
+    <p>
+    <strong>Email:</strong>
+    <%= @hack_member.email %>
+    </p>
 
-<p>
-  <strong>Tel home:</strong>
-  <%= @hack_member.tel_home %>
-</p>
+    <p>
+    <strong>Email ok:</strong>
+    <%= @hack_member.email_ok %>
+    </p>
 
-<p>
-  <strong>Tel office:</strong>
-  <%= @hack_member.tel_office %>
-</p>
+    <p>
+    <strong>Email issues:</strong>
+    <%= @hack_member.email_issues %>
+    </p>
 
-<p>
-  <strong>Tel cell:</strong>
-  <%= @hack_member.tel_cell %>
-</p>
+    <p>
+    <strong>Non hacker:</strong>
+    <%= @hack_member.non_hacker %>
+    </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @hack_member.email %>
-</p>
+    <p>
+    <strong>Comments:</strong>
+    <%= simple_format @hack_member.comments %>
+    </p>
 
-<p>
-  <strong>Email ok:</strong>
-  <%= @hack_member.email_ok %>
-</p>
+    <p>
+    <strong>Contact via:</strong>
+    <%= @hack_member.contact_via %>
+    </p>
 
-<p>
-  <strong>Email issues:</strong>
-  <%= @hack_member.email_issues %>
-</p>
+    <p>
+    <strong>Group with:</strong>
+    <%= @hack_member.group_with %>
+    </p>
 
-<p>
-  <strong>Non hacker:</strong>
-  <%= @hack_member.non_hacker %>
-</p>
-
-<p>
-  <strong>Comments:</strong>
-  <%= @hack_member.comments %>
-</p>
-
-<p>
-  <strong>Contact via:</strong>
-  <%= @hack_member.contact_via %>
-</p>
-
-<p>
-  <strong>Group with:</strong>
-  <%= @hack_member.group_with %>
-</p>
-
-<p>
-  <strong>Hack attendances count:</strong>
-  <%= @hack_member.hack_attendances_count %>
-</p>
-<hr />
-<% if @hack_member.hack_attendances_count > 0 %>
-  <h2>Hacked on..</h2>
-  <% @hack_meets.each do |hack_meet| %>
-    <%= link_to hack_meet.hack_date, hack_meet %><br />
+    <p>
+    <strong>Hack attendances count:</strong>
+    <%= @hack_member.hack_attendances_count %>
+    </p>
+    <hr />
+    <% if @hack_member.hack_attendances_count > 0 %>
+      <h2>Hacked on..</h2>
+    <% @hack_meets.each do |hack_meet| %>
+      <%= link_to hack_meet.hack_date, hack_meet %><br />
   <% end -%>
-<% end -%>
+  <% end -%>
 
   </div>
 </div>
 
 <div class="row">
   <div class="large-12 columns">
-<%= link_to 'Edit', edit_hack_member_path(@hack_member), :class => 'button' %> |
-<%= link_to 'Back', hack_members_path, :class => 'button' %>
-</div>
+    <ul class="button-group round">
+      <li><%= link_to 'Edit', edit_hack_member_path(@hack_member), :class => 'button secondary small' %></li>
+      <li><%= link_to 'Back', hack_members_path, :class => 'button secondary small' %></li>
+    </ul>
+  </div>
 </div>

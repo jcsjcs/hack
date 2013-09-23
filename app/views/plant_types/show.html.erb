@@ -22,7 +22,9 @@
 
 <div class="row">
   <div class="large-12 columns">
-    <%= link_to 'Edit', edit_plant_type_path(@hack_venue), :class => 'button' %> |
-    <%= link_to 'Back', plant_types_path, :class => 'button' %>
+    <ul class="button-group round">
+      <li><%= link_to 'Edit', edit_plant_type_path(@plant_type), :class => 'button secondary small' %></li>
+      <li><%= link_to 'Back', plant_types_path, :class => 'button secondary small' %></li>
+    </ul>
   </div>
 </div>
