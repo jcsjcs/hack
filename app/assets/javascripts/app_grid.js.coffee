@@ -3,6 +3,12 @@ class window.AppGrid
   constructor: (@gridid, columns, data, config) ->
     @config = config
     @columns = columns
+    jQuery.each @columns, (i, val) ->
+      if val.formatter == "ShowLinkTextFormatter"
+        val.formatter = ShowLinkTextFormatter
+      if val.formatter == "HackAttendanceFormatter"
+        val.formatter = HackAttendanceFormatter
+
     @options =
       editable: true
       enableCellNavigation: true
@@ -10,23 +16,33 @@ class window.AppGrid
       autoEdit: false
       enableTextSelectionOnCells: true
       syncColumnCellResize: true
-    @columns.unshift
-      id: "show"
-      name: "Show"
-      field: "show"
-      formatter: ShowLinkFormatter
-      unfiltered: true
+    if @config.show_column
+      @columns.push
+        id: "show"
+        name: "Show"
+        field: "show"
+        formatter: ShowLinkFormatter
+        unfiltered: true
 
-    @columns.unshift
-      id: "edit"
-      name: "Edit"
-      field: "edit"
-      formatter: EditLinkFormatter
-      unfiltered: true
+    if @config.edit_column
+      @columns.push
+        id: "edit"
+        name: "Edit"
+        field: "edit"
+        formatter: EditLinkFormatter
+        unfiltered: true
+
+    if @config.destroy_column
+      @columns.push
+        id: "destroy"
+        name: "Destroy"
+        field: "destroy"
+        formatter: DestroyLinkFormatter
+        unfiltered: true
 
     @columns.unshift
       id: "rowNumber"
-      name: "Row"
+      name: ""
       field: "rn"
       formatter: RowNumberFormatter
       behavior: "select"
@@ -57,6 +73,7 @@ class window.AppGrid
       @grid.render()
 
     columnpicker = new Slick.Controls.ColumnPicker(@columns, @grid, @options)
+    #TODO: Tie grid to gridid.data & use to get dataView for refresh...
     $("##{@gridid}txtSearch").keyup (e) ->
       return  if e.which is 27
       @searchString = @value
@@ -75,6 +92,15 @@ class window.AppGrid
 
   ShowLinkFormatter = (row, cell, value, columnDef, dataContext) ->
     "<a href=\"#{@config.editUrl}/" + dataContext.id + "\">show</a>"
+
+  ShowLinkTextFormatter = (row, cell, value, columnDef, dataContext) ->
+    "<a href=\"#{@config.editUrl}/" + dataContext.id + "\">#{value}</a>"
+
+  DestroyLinkFormatter = (row, cell, value, columnDef, dataContext) ->
+    "<a data-confirm=\"Are you sure?\" data-method=\"delete\" href=\"#{@config.editUrl}/" + dataContext.id + "\" rel=\"nofollow\">destroy</a>"
+
+  HackAttendanceFormatter = (row, cell, value, columnDef, dataContext) ->
+    "<span style=\"width:3em;display:inline-block;text-align:right;padding-right:0.5em;\">#{value}</span> <a href=\"hack_meets/" + dataContext.id + "attendance\">Change</a>"
 
   myFilter = (item, args) ->
     cols = []

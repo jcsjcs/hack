@@ -34,7 +34,7 @@
   <script>
     var data    = <%= @grid_data.html_safe %>;
     var columns = <%= @grid_columns.html_safe %>;
-    var config  = {editUrl: 'hack_members'}
+    var config  = {editUrl: 'hack_members', edit_column: true, show_column: true, destroy_column: true}
 
     var thisGrid = new AppGrid('memberGrid', columns, data, config);
   </script>

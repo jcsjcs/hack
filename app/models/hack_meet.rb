@@ -10,14 +10,23 @@ class HackMeet < ActiveRecord::Base
   GRID_COLS = %w{hack_year hack_month hack_date start_time work_area notes hack_venue social hack_attendances_count}
 
   def self.grid_columns
-    cols = []
-    GRID_COLS.each {|f| cols << {id: "#{f}", name: "#{f.humanize}", field: "#{f}" } }
-    cols
+   [
+     {id: "year_month", name: "Month", field: "year_month", formatter: "ShowLinkTextFormatter", width: 200},
+     {id: "hack_date", name: "Date", field: "hack_date", width: 100},
+     {id: "hack_attendances_count", name: "Attendances", field: "hack_attendances_count", formatter: 'HackAttendanceFormatter', width: 150},
+     {id: "start_time", name: "Start", field: "start_time"},
+     {id: "work_area", name: "Work area", field: "work_area", width: 120},
+     {id: "notes", name: "Notes", field: "notes", width: 120},
+     {id: "hack_venue", name: "Venue", field: "hack_venue", width: 120},
+     {id: "social", name: "Social", field: "social"} # formatter: 'BooleanFormatter
+   ]
   end
 
   def to_grid_row
     row = {}
-    (GRID_COLS+['id']).each {|f| row[f] = self.send(f) }
+    (%w{hack_date start_time work_area notes social hack_attendances_count id}).each {|f| row[f] = self.send(f) }
+    row['year_month'] = "#{self.hack_year}: #{self.hack_date.strftime('%B')}"
+    row['hack_venue'] = self.hack_venue.to_s
     row
   end
 
