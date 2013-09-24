@@ -15,7 +15,7 @@
   <div class="large-4 columns">
     <div class="row collapse">
       <div class="large-10 columns">
-        <input type=search id="txtSearch" placeholder="Search...">
+        <input type=search id="memberGridtxtSearch" placeholder="Search...">
       </div>
       <div class="large-2 columns">
         <span class="postfix radius"><i class="fi-page-search"></i></span>
@@ -25,120 +25,17 @@
 
   <div class="row">
     <div class="large-12 columns">
-      <div id="myGrid" style="height:300px;"></div>
+      <div id="memberGrid" style="height:300px;">Loading grid...</div>
     </div>
   </div>
 
 
 <% content_for :late_js do %>
-<script>
-    var RowNumberFormatter = function(row, cell, value, columnDef, dataContext) {
-      return row + 1 + ' ';
-    };
-    var EditLinkFormatter = function(row, cell, value, columnDef, dataContext) {
-      return '<a href="hack_members/'+dataContext.id+'/edit">edit</a>';
-    };
-    var ShowLinkFormatter = function(row, cell, value, columnDef, dataContext) {
-      return '<a href="hack_members/'+dataContext.id+'">show</a>';
-    };
+  <script>
+    var data    = <%= @grid_data.html_safe %>;
+    var columns = <%= @grid_columns.html_safe %>;
+    var config  = {editUrl: 'hack_members'}
 
-  var grid;
-  var data = <%= @grid_data.html_safe %>;
-  var options = {
-    editable: true,
-    enableCellNavigation: true,
-    enableColumnReorder: false, // load JQ UI sort...
-    autoEdit: false,
-
-    enableTextSelectionOnCells: true,
-    //multiSelect: false,
-    syncColumnCellResize: true,
-    //enableColumnReorder: true, needs jq ui sortable
-    //multiColumnSort: true
-
-  };
-  var columns = <%= @grid_columns.html_safe %>;
-  columns.unshift({id:'show', name:'Show',field:'show', formatter:ShowLinkFormatter, unfiltered:true});
-  columns.unshift({id:'edit', name:'Edit',field:'edit', formatter:EditLinkFormatter, unfiltered:true});
-  columns.unshift({id:'rowNumber', name:'Row', field: 'rn', formatter:RowNumberFormatter, behavior:'select', cssClass:'cell-selection', width:40, cannotTriggerInsert:true, resizable:false, unselectable:true, sortable:false, unfiltered:true, cssClass: 'ui-state-default jqgrid-rownum slk_cell_right_align'});
-
-  var searchString = "";
-  var selectedIds = [];
-
-  $(function () {
-    // initialize the model
-    dataView = new Slick.Data.DataView({ inlineFilters: true });
-    dataView.beginUpdate();
-    dataView.setItems(data);
-    dataView.setFilter(myFilter);
-    dataView.endUpdate();
-
-    grid = new Slick.Grid("#myGrid", dataView, columns, options);
-    grid.setSelectionModel(new Slick.RowSelectionModel({selectActiveRow: false}));
-//    var filterPlugin = new Ext.Plugins.HeaderFilter({sortAvailable: false});
-
-    
-    // wire up model events to drive the grid
-    dataView.onRowCountChanged.subscribe(function (e, args) {
-      grid.updateRowCount();
-      grid.render();
-    });
-
-    dataView.onRowsChanged.subscribe(function (e, args) {
-      grid.invalidateRows(args.rows);
-      grid.render();
-    });
-
-    var columnpicker = new Slick.Controls.ColumnPicker(columns, grid, options);
-
-    // Wire up the search textbox to apply the filter to the model
-    $("#txtSearch").keyup(function (e) {
-      // Ignore Esc - handled by HTML5 onSearch event below
-      if (e.which == 27) { return; }
-
-      searchString = this.value;
-      dataView.refresh();
-    });
-
-    // Check for click of [x] to clear search box...
-    $("#txtSearch").on('search', function () {
-      // clear on [x] clicked in search box or ESC pressed
-      if (this.value === "") {
-        searchString = this.value;
-        dataView.refresh();
-      }
-    });
-
-  function myFilter(item, args) {
-        // Get columns, but exclude non-filterable ones.
-        var columns = [];
-        if (grid === undefined) { return true; }
-        jQuery.each(grid.getColumns(), function(i,val) {
-          if(!val.unfiltered) { columns.push(val); }
-        });
-        var value = true;
-        var searchHit = false;
-
-        // for (var i = 0; i < columns.length; i++) {
-        //     var col = columns[i];
-        //     var filterValues = col.filterValues;
-
-        //     if (filterValues && filterValues.length > 0) {
-        //         value = value & _.contains(filterValues, item[col.field]);
-        //     }
-        // }
-        if(value && searchString != '') {
-          for (var i = 0; i < columns.length; i++) {
-              var col = columns[i];
-              if (String(item[col.field]).toLowerCase().indexOf(searchString.toLowerCase()) !== -1) {
-                searchHit = true;
-              }
-          }
-          return searchHit;
-        }
-        return value;
-  }
-
-  })
-</script>
+    var thisGrid = new AppGrid('memberGrid', columns, data, config);
+  </script>
 <% end %>

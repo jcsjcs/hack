@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require jquery.ui.all
 //= require foundation
-//= require_tree .
 //= require slick
+//= require_tree .
 
 $(document).foundation();

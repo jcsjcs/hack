@@ -6,6 +6,21 @@ class HackMeet < ActiveRecord::Base
 
   before_save :set_year_month
 
+#  Year: Month	Date	Attendance	Start time	Work area	Notes	Hack venue	Social	Hack attendances count
+  GRID_COLS = %w{hack_year hack_month hack_date start_time work_area notes hack_venue social hack_attendances_count}
+
+  def self.grid_columns
+    cols = []
+    GRID_COLS.each {|f| cols << {id: "#{f}", name: "#{f.humanize}", field: "#{f}" } }
+    cols
+  end
+
+  def to_grid_row
+    row = {}
+    (GRID_COLS+['id']).each {|f| row[f] = self.send(f) }
+    row
+  end
+
   def hack_members_for_newsletter
     ar = []
     self.hack_members.hack_seq.each do |member|

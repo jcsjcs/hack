@@ -10,4 +10,6 @@
 * Show pages need designing
 * Chart and other reports
 * Make chart/report exportable to pdf
+* Import data from old hack project (SQLite to Pg) - drop and re-create via migrations first...
+* Mailing from app
 

@@ -52,3 +52,31 @@
 </div>
 </div>
 
+  <div class="row">
+  <div class="large-4 columns">
+    <div class="row collapse">
+      <div class="large-10 columns">
+        <input type=search id="meetGridtxtSearch" placeholder="Search...">
+      </div>
+      <div class="large-2 columns">
+        <span class="postfix radius"><i class="fi-page-search"></i></span>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <div id="meetGrid" style="height:300px;">Loading grid...</div>
+    </div>
+  </div>
+
+<% content_for :late_js do %>
+  <script>
+    var data = <%= @grid_data.html_safe %>;
+    var columns = <%= @grid_columns.html_safe %>;
+    var config = {editUrl: 'hack_meets'}
+
+    var thisGrid = new AppGrid('meetGrid', columns, data, config);
+  </script>
+<% end %>
