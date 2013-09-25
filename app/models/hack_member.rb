@@ -9,17 +9,23 @@ class HackMember < ActiveRecord::Base
 
   validates_presence_of :surname
 
-  GRID_COLS = %w{title initials first_name surname tel_home tel_office tel_cell email email_ok email_issues non_hacker comments contact_via group_with hack_attendances_count}
-
   def self.grid_columns
-    cols = []
-    GRID_COLS.each {|f| cols << {id: "#{f}", name: "#{f.humanize}", field: "#{f}" } }
-    cols
+   [
+     {id: "fullname", name: "Name", field: "fullname", width: 200},
+     {id: "hack_attendances_count", name: "Hacks", field: "hack_attendances_count", cssClass: 'numeric'},
+     {id: "email", name: "email", field: "email", width: 200},
+     {id: "email_ok", name: "Email ok", field: "email_ok", formatter: 'BooleanFormatter', cssClass: 'centred'},
+     {id: "email_issues", name: "Email issues", field: "email_issues", width: 120},
+     {id: "tel_combined", name: "Tel. numbers", field: "tel_combined", width: 200},
+     {id: "non_hacker", name: "Non hacker?", field: "non_hacker", formatter: 'BooleanFormatter', cssClass: 'centred'}
+   ]
   end
 
   def to_grid_row
     row = {}
-    (GRID_COLS+['id']).each {|f| row[f] = self.send(f) }
+    (%w{hack_attendances_count email email_ok email_issues non_hacker id}).each {|f| row[f] = self.send(f) }
+    row['tel_combined'] = self.combined_phone_nos
+    row['fullname']     = self.full_name
     row
   end
 

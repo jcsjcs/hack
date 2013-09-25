@@ -6,9 +6,6 @@ class HackMeet < ActiveRecord::Base
 
   before_save :set_year_month
 
-#  Year: Month	Date	Attendance	Start time	Work area	Notes	Hack venue	Social	Hack attendances count
-  GRID_COLS = %w{hack_year hack_month hack_date start_time work_area notes hack_venue social hack_attendances_count}
-
   def self.grid_columns
    [
      {id: "year_month", name: "Month", field: "year_month", formatter: "ShowLinkTextFormatter", width: 200},
@@ -18,7 +15,7 @@ class HackMeet < ActiveRecord::Base
      {id: "work_area", name: "Work area", field: "work_area", width: 120},
      {id: "notes", name: "Notes", field: "notes", width: 120},
      {id: "hack_venue", name: "Venue", field: "hack_venue", width: 120},
-     {id: "social", name: "Social", field: "social"} # formatter: 'BooleanFormatter
+     {id: "social", name: "Social", field: "social", formatter: 'BooleanFormatter', cssClass: 'centred'}
    ]
   end
 

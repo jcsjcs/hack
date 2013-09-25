@@ -18,7 +18,7 @@
         <input type=search id="memberGridtxtSearch" placeholder="Search...">
       </div>
       <div class="large-2 columns">
-        <span class="postfix radius"><i class="fi-page-search"></i></span>
+        <span class="postfix radius"><i class="fi-magnifying-glass"></i></span>
       </div>
     </div>
   </div>
@@ -37,5 +37,6 @@
     var config  = {editUrl: 'hack_members', edit_column: true, show_column: true, destroy_column: true}
 
     var thisGrid = new AppGrid('memberGrid', columns, data, config);
+    thisGrid.makeSearchEvents(thisGrid, 'memberGridtxtSearch');
   </script>
 <% end %>

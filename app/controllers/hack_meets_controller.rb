@@ -19,7 +19,7 @@ class HackMeetsController < ApplicationController
 
   # GET /hack_meets/new
   def new
-    @hack_meet = HackMeet.new
+    @hack_meet = HackMeet.new(:hack_date => Date.today)
   end
 
   # GET /hack_meets/1/edit
