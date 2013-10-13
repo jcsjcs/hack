@@ -17,6 +17,16 @@ div.slick-cell a {
   padding-right: 4px;
 }
 
+.slick-row.active .slick-cell {
+  background: #E8F154;
+}
+
+fieldset {
+  p {
+    margin-bottom: 0;
+  }
+}
+
 div {
   &.field, &.actions {
     margin-bottom: 10px;
