@@ -1,17 +1,19 @@
 class HackMember < ActiveRecord::Base
   has_many :hack_attendances
   has_many :hack_meets, :through => :hack_attendances
+  belongs_to :contact_via, :class_name => 'HackMember'
+  belongs_to :group_with,  :class_name => 'HackMember'
   
-  scope :hack_seq, -> {order('hack_attendances_count > 0 DESC, non_hacker, UPPER(surname), first_name') }
+  scope :hack_seq,      -> {order('hack_attendances_count > 0 DESC, non_hacker, UPPER(surname), first_name') }
   scope :hack_seq_desc, -> {order('hack_attendances_count > 0, non_hacker DESC, UPPER(surname) DESC, first_name DESC') }
-  scope :name_seq, -> {order('UPPER(surname), first_name') }
+  scope :name_seq,      -> {order('UPPER(surname), first_name') }
   scope :name_seq_desc, -> {order('UPPER(surname) DESC, first_name DESC') }
 
   validates_presence_of :surname
 
   def self.grid_columns
    [
-     {id: "fullname", name: "Name", field: "fullname", width: 200},
+     {id: "fullname", name: "Name", field: "fullname", formatter: "ShowLinkTextFormatter", width: 200},
      {id: "hack_attendances_count", name: "Hacks", field: "hack_attendances_count", cssClass: 'numeric'},
      {id: "email", name: "email", field: "email", width: 200},
      {id: "email_ok", name: "Email ok", field: "email_ok", formatter: 'BooleanFormatter', cssClass: 'centred'},
@@ -50,8 +52,12 @@ class HackMember < ActiveRecord::Base
     if only_one
       [tel_home, tel_office, tel_cell].select{|t| !t.nil? && t != ''}.first
     else
-      [tel_home, tel_office, tel_cell].select{|t| !t.nil? && t != ''}.join(', ')
+      [tel_home, tel_office, tel_cell].select{|t| !t.nil? && t.strip != ''}.join(', ')
     end
+  end
+
+  def other_hackers
+    HackMember.where("id <> #{self.id}").order('surname, first_name').all.unshift(HackMember.new)
   end
 
 end

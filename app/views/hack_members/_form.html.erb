@@ -109,14 +109,14 @@
     </div>
     <div class="large-5 columns">
       <div class="field">
-        <%= f.label :contact_via %><br>
-        <%= f.number_field :contact_via %>
+        <%= f.label :contact_via_id %><br>
+        <%= f.collection_select(:contact_via_id, @hack_member.other_hackers, :id, :full_name, :prompt => 'Member to contact if no details for this member') %>
       </div>
     </div>
     <div class="large-5 columns">
       <div class="field">
-        <%= f.label :group_with %><br>
-        <%= f.number_field :group_with %>
+        <%= f.label :group_with_id %><br>
+        <%= f.collection_select(:group_with_id, @hack_member.other_hackers, :id, :full_name, :prompt => 'Member to group with in attendance list') %>
       </div>
     </div>
   </div>

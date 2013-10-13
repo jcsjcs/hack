@@ -82,6 +82,6 @@ class HackMembersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hack_member_params
-      params.require(:hack_member).permit(:title, :initials, :first_name, :surname, :tel_home, :tel_office, :tel_cell, :email, :email_ok, :email_issues, :non_hacker, :comments, :contact_via, :group_with, :hack_attendances_count)
+      params.require(:hack_member).permit(:title, :initials, :first_name, :surname, :tel_home, :tel_office, :tel_cell, :email, :email_ok, :email_issues, :non_hacker, :comments, :contact_via_id, :group_with_id, :hack_attendances_count)
     end
 end

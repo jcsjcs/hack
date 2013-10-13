@@ -29,9 +29,11 @@ class HackMeet < ActiveRecord::Base
 
   def hack_members_for_newsletter
     ar = []
+    #TODO: use group with...
     self.hack_members.hack_seq.each do |member|
       ar << member.informal_name
     end
+    #TODO: use hack_leader...
     if ar.include? 'James Silberbauer'
       ar.delete 'James Silberbauer'
       ar.push 'James Silberbauer'
