@@ -15,7 +15,7 @@ class CreateHackMembers < ActiveRecord::Migration
       t.text :comments
       t.integer :contact_via
       t.integer :group_with
-      t.integer :hack_attendances_count, :integer, :default => 0
+      t.integer :hack_attendances_count, :default => 0
 
       t.timestamps
     end
