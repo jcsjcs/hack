@@ -26,4 +26,9 @@ Hack::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+  # Tell dev mode to look in a dummy place for assets. Avoids conflict with assets precompiled for production.
+  # NB. Only precompile assets in production mode.
+  # RAILS_ENV=production rake assets:precompile
+  config.assets.prefix = '/assets_dev'
 end
