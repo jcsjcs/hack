@@ -117,13 +117,13 @@
         <fieldset>
           <legend>Media</legend>
           <% if @pdfs.empty? -%>
-            <p>There are no newsleeter for this meet.</p>
+            <p>There are no newsletters for this meet.</p>
           <% else -%>
-            <p>
+            <ul class="inline-list">
             <% @pdfs.each do |pdf| -%>
-              <a href="/<%= pdf.to_s %>"><%= pdf.basename.to_s %></a>
+              <li><a href="/<%= pdf.to_s %>"><%= pdf.basename.to_s %></a></li>
             <% end -%>
-            </p>
+            </ul>
           <% end -%>
 
           <% if @images.empty? -%>
