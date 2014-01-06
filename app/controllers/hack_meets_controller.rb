@@ -15,6 +15,12 @@ class HackMeetsController < ApplicationController
   # GET /hack_meets/1
   # GET /hack_meets/1.json
   def show
+    @image_folder = "/hack_media/#{@hack_meet.hack_year}/#{@hack_meet.hack_date.strftime('%Y-%m-%d')}"
+    pub_path      = Pathname.new(File.join(Rails.root, 'public'))
+    @image_path   = Pathname.new(File.join(Rails.root, 'public', @image_folder))
+    @pdf_path     = @image_path.join('newsletter')
+    @images       = @image_path.children.reject {|d| d.directory?}.map {|c| c.basename.to_s }.sort
+    @pdfs         = @pdf_path.children.reject {|f| f.extname != '.pdf' }.map {|a| a.relative_path_from(pub_path) }.sort
   end
 
   # GET /hack_meets/new

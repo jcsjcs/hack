@@ -8,60 +8,146 @@
   <div class="large-12 columns">
     <p id="notice"><%= notice %></p>
 
-    <p>
-    <strong>Hack date:</strong>
-    <%= @hack_meet.hack_date %>
-    </p>
+    <div class="row">
+  <div class="large-12 columns">
+      <fieldset>
+        <legend>Hack</legend>
+        <div class="row">
+          <div class="large-4 columns">
+            <p>
+            <strong>Date:</strong>
+            <%= @hack_meet.hack_date %>
+            </p>
+          </div>
 
-    <p>
-    <strong>Start time:</strong>
-    <%= @hack_meet.start_time %>
-    </p>
+          <div class="large-4 columns">
+            <p>
+            <strong>Time:</strong>
+            <%= @hack_meet.start_time %>
+            </p>
+          </div>
 
-    <p>
-    <strong>Work area:</strong>
-    <%= @hack_meet.work_area %>
-    </p>
+          <div class="large-4 columns">
+            <p>
+            <strong>Venue:</strong>
+            <%= @hack_meet.hack_venue %>
+            </p>
+          </div>
+        </div>
 
-    <p>
-    <strong>Notes:</strong>
-    <%= simple_format @hack_meet.notes %>
-    </p>
+        <div class="row">
+          <div class="large-4 columns">
+            <p>
+            <strong>Work area:</strong>
+            <%= @hack_meet.work_area %>
+            </p>
+          </div>
 
-    <p>
-    <strong>Hack venue:</strong>
-    <%= @hack_meet.hack_venue %>
-    </p>
+          <div class="large-4 columns">
+            <p>
+            <strong>Social:</strong>
+            <%= @hack_meet.social %>
+            </p>
+          </div>
 
-    <p>
-    <strong>Social:</strong>
-    <%= @hack_meet.social %>
-    </p>
+          <div class="large-4 columns">
+            <p>
+            <strong>Attendance count:</strong>
+            <%= @hack_meet.hack_attendances_count %>
+            </p>
+          </div>
+        </div>
 
-    <p>
-    <strong>Hack attendances count:</strong>
-    <%= @hack_meet.hack_attendances_count %>
-    </p>
-    <p>
-    <strong>List of plants:</strong>
-    <%= @hack_meet.plant_list %>
-    </p>
+        <div class="row">
+          <div class="large-12 columns">
+            <p>
+            <strong>List of plants:</strong>
+            <%= @hack_meet.plant_list %>
+            </p>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+    </div>
 
-    <p>
-    <strong>Attended by:</strong>
-    <%= @hack_meet.hack_attendances_count %>
-    <% @hack_meet.hack_members.hack_seq.each do |hack_member| -%>
-      <%= link_to hack_member.full_name, hack_member_path(hack_member) %><br />
-  <% end -%>
-    </p>
-    <p>
-    <strong>Newsletter list of names:</strong>
-    <%= @hack_meet.hack_members_for_newsletter %>
-    </p>
+    <div class="row">
+      <div class="large-12 columns">
+        <fieldset>
+          <legend>Notes:</legend>
+          <%= simple_format @hack_meet.notes %>
+        </fieldset>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-12 columns">
+        <fieldset>
+          <legend>Attendance</legend>
+          <div class="row">
+            <div class="large-12 columns">
+              <p>
+              <table>
+              <%# @hack_meet.hack_members.hack_seq.each do |hack_member| -%>
+              <% @hack_meet.hack_members.hack_seq.in_groups_of(4) do |hack_members| -%>
+                <tr>
+              <% hack_members.compact.each do |hack_member| -%>
+                <td><%= link_to hack_member.full_name, hack_member_path(hack_member) %><br /></td>
+              <% end -%>
+              </tr>
+              <% end -%>
+              </table>
+              </p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="large-12 columns">
+              <p>
+              <strong>Newsletter list of names:</strong>
+              <%= @hack_meet.hack_members_for_newsletter %>
+              </p>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-12 columns">
+        <fieldset>
+          <legend>Media</legend>
+          <% if @pdfs.empty? -%>
+            <p>There are no newsleeter for this meet.</p>
+          <% else -%>
+            <p>
+            <% @pdfs.each do |pdf| -%>
+              <a href="/<%= pdf.to_s %>"><%= pdf.basename.to_s %></a>
+            <% end -%>
+            </p>
+          <% end -%>
+
+          <% if @images.empty? -%>
+            <p>There are no images for this meet.</p>
+          <% else -%>
+            <p>Click on the image name to view in gallery, click on the icon to view full-size in the browser.</p>
+            <div id="gallery">
+              <ol class="inline-list">
+                <% @images.each do |image| -%>
+                  <li>
+                    <%= link_to image_tag('photo_link.png'), File.join(@image_folder, image), :title => '(view in browser)', :style => 'display:inline;' %>&nbsp;
+                    <%= link_to image, File.join(@image_folder, image), :title => image, :class => 'gallery', :style => 'display:inline;' %>
+                  </li>
+                <% end -%>
+              </ol>
+            </div>
+          <% end -%>
+
+        </fieldset>
+      </div>
+    </div>
 
   </div>
 </div>
-<p>Could include links to photos and pdf...</p>
 
 <div class="row">
   <div class="large-12 columns">
@@ -71,3 +157,11 @@
     </ul>
   </div>
 </div>
+
+<% content_for :late_js do %>
+      <script language="JavaScript">
+        jQuery(function() {
+          jQuery(".gallery").colorbox({rel:'group', transition:"none", width:"90%", height:"90%"});
+        });
+      </script>
+<% end %>

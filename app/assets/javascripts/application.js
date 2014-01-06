@@ -15,6 +15,7 @@
 //= require jquery.ui.all
 //= require foundation
 //= require slick
+//= require jquery.colorbox-min
 //= require_tree .
 
 $(document).foundation();
