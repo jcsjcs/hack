@@ -57,7 +57,11 @@ class HackMember < ActiveRecord::Base
   end
 
   def other_hackers
-    HackMember.where("id <> #{self.id}").order('surname, first_name').all.unshift(HackMember.new)
+    if self.new_record?
+      HackMember.order('surname, first_name').all.unshift(HackMember.new)
+    else
+      HackMember.where("id <> #{self.id}").order('surname, first_name').all.unshift(HackMember.new)
+    end
   end
 
 end
