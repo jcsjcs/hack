@@ -17,4 +17,26 @@ class HomeController < ApplicationController
     end
 
   end
+
+  def run_database_backup
+    require 'open3'
+    fn = '/home/james/bin/hack_pg_backup.sh'
+    if File.exist?(fn)
+      # @backup_result = `#{fn}`
+      # if $?.exitstatus != 0
+      #   @backup_result.insert(0, "AN ERROR OCCURRED:\nPlease try to run manually\n\n")
+      # end
+      stdout_str, stderr_str, status = Open3.capture3(fn)
+      #sin, stdout_str, stderr_str, thr = Open3.capture3(fn) # UNTIL JRuby 1.7.1
+      if status.exitstatus == 0
+      #if stderr_str.blank? # UNTIL JRuby 1.7.1
+        @backup_result = stdout_str
+      else
+        @backup_result = "AN ERROR OCCURRED:\n\n#{stderr_str}"
+      end
+    else
+      @backup_result = "There is no backup process defined at #{fn}."
+    end
+  end
+
 end

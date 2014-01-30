@@ -1,6 +1,7 @@
 Hack::Application.routes.draw do
 
   get "home/welcome"
+  get "run_database_backup" => "home#run_database_backup"
 
   resources :hack_meets do
     member do
@@ -8,7 +9,6 @@ Hack::Application.routes.draw do
       post 'update_attendance'
     end
   end
-
 
   resources :plant_types
 
