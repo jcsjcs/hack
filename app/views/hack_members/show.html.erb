@@ -83,14 +83,22 @@
     <div class="large-5 columns">
       <p>
       <strong>Contact via:</strong><br>
-      <%= @hack_member.contact_via.try(:full_name) %>
+      <% if @hack_member.contact_via_id.nil? -%>
+        &nbsp;
+      <% else -%>
+        <%= link_to @hack_member.contact_via.try(:full_name), hack_member_path(@hack_member.contact_via) %>
+      <% end -%>
       </p>
     </div>
 
     <div class="large-5 columns">
       <p>
       <strong>Group with:</strong><br>
-      <%= @hack_member.group_with.try(:full_name) %>
+      <% if @hack_member.group_with_id.nil? -%>
+        &nbsp;
+      <% else -%>
+        <%= link_to @hack_member.group_with.try(:full_name), hack_member_path(@hack_member.group_with) %>
+      <% end -%>
       </p>
     </div>
   </div>

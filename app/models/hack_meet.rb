@@ -32,10 +32,17 @@ class HackMeet < ActiveRecord::Base
 
   def hack_members_for_newsletter
     ar = []
-    #TODO: use group with...
-    self.hack_members.hack_seq.each do |member|
-      ar << member.informal_name
+    gr = []
+
+    hack_members.hack_seq.each do |member|
+      if member.group_with_id.nil? || !hack_member_ids.include?(member.group_with_id)
+        ar << {member.informal_name => []}
+      else
+        gr << {member.group_with.informal_name => member.informal_name}
+      end 
     end
+    gr.each {|g| elem = ar.find {|a| a.keys.include?(g.keys.first) }; elem[g.keys.first] << g.values.first }
+    ar = ar.map {|a| [a.keys.first, a.values.first] }.flatten
 
     leader = self.hack_leader.informal_name
     if ar.include? leader
