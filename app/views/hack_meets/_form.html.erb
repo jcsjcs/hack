@@ -32,6 +32,14 @@
     <div class="row">
       <div class="large-6 columns">
         <div class="field">
+          <%= f.label :hack_leader_id %><br>
+          <%= f.collection_select(:hack_leader_id, HackMember.name_seq, :id, :full_name, :prompt => 'Hack Leader') %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-6 columns">
+        <div class="field">
           <%= f.label :work_area %><br>
           <%= f.text_field :work_area %>
         </div>

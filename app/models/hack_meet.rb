@@ -2,7 +2,10 @@ class HackMeet < ActiveRecord::Base
   has_many :hack_members, :through => :hack_attendances
   has_many :hack_attendances
   belongs_to :hack_venue
+  belongs_to :hack_leader, :class_name => 'HackMember', :foreign_key => :hack_leader_id
   has_and_belongs_to_many :plant_types
+
+  validates_presence_of :hack_leader_id
 
   before_save :set_year_month
 
@@ -33,11 +36,13 @@ class HackMeet < ActiveRecord::Base
     self.hack_members.hack_seq.each do |member|
       ar << member.informal_name
     end
-    #TODO: use hack_leader...
-    if ar.include? 'James Silberbauer'
-      ar.delete 'James Silberbauer'
-      ar.push 'James Silberbauer'
+
+    leader = self.hack_leader.informal_name
+    if ar.include? leader
+      ar.delete leader
+      ar.push leader
     end
+
     ar.blank? ? 'None.' : ar.to_sentence(:last_word_connector => ' and ')
   end
 

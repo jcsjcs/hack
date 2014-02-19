@@ -31,7 +31,8 @@ class HackMeetsController < ApplicationController
 
   # GET /hack_meets/new
   def new
-    @hack_meet = HackMeet.new(:hack_date => Date.today)
+    hl = HackMeet.select('hack_leader_id, count(hack_leader_id)').where('hack_leader_id IS NOT NULL').group(:hack_leader_id).order('2 desc').first
+    @hack_meet = HackMeet.new(:hack_date => Date.today, :hack_leader_id => hl.hack_leader_id)
   end
 
   # GET /hack_meets/1/edit
@@ -106,6 +107,6 @@ class HackMeetsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hack_meet_params
-      params.require(:hack_meet).permit(:hack_year, :hack_month, :hack_date, :start_time, :work_area, :notes, :hack_venue_id, :social, :hack_attendances_count, :plant_type_ids => [])
+      params.require(:hack_meet).permit(:hack_year, :hack_month, :hack_date, :start_time, :hack_leader_id, :work_area, :notes, :hack_venue_id, :social, :hack_attendances_count, :plant_type_ids => [])
     end
 end

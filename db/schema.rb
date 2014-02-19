@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130923113333) do
+ActiveRecord::Schema.define(version: 20140219183032) do
 
   create_table "hack_attendances", force: true do |t|
     t.integer  "hack_meet_id"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20130923113333) do
     t.integer  "hack_attendances_count", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "hack_leader_id"
   end
 
   add_index "hack_meets", ["hack_venue_id"], name: "index_hack_meets_on_hack_venue_id", using: :btree
@@ -59,12 +60,11 @@ ActiveRecord::Schema.define(version: 20130923113333) do
     t.string   "email_issues"
     t.boolean  "non_hacker",             default: false
     t.text     "comments"
-    t.integer  "contact_via"
-    t.integer  "group_with"
-    t.integer  "hack_attendances_count", default: 0
-    t.integer  "integer",                default: 0
+    t.integer  "contact_via_id"
+    t.integer  "group_with_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "hack_attendances_count", default: 0
   end
 
   create_table "hack_venues", force: true do |t|
