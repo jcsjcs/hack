@@ -47,6 +47,9 @@ gem 'quiet_assets', :group => :development
 
 gem 'rack-mini-profiler'
 
+gem 'pry-rails'
+gem 'pry-plus', group: :development
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
