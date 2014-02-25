@@ -5,9 +5,8 @@ class HackMeetsController < ApplicationController
   # GET /hack_meets
   # GET /hack_meets.json
   def index
-    @hack_meets = HackMeet.order('hack_year DESC, hack_month DESC').all
     hack_meets = []
-    HackMeet.order('hack_year DESC, hack_month DESC').all.each {|r| hack_meets << r.to_grid_row }
+    HackMeet.includes(:hack_venue).order(:hack_year => :desc, :hack_month => :desc).all.each {|r| hack_meets << r.to_grid_row }
     @grid_columns = HackMeet.grid_columns.to_json
     @grid_data    = hack_meets.to_json
   end
