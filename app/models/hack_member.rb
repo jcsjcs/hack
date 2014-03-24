@@ -13,10 +13,10 @@ class HackMember < ActiveRecord::Base
 
   def self.grid_columns
    [
-     {id: "fullname", name: "Name", field: "fullname", formatter: "ShowLinkTextFormatter", width: 200},
-     {id: "hack_attendances_count", name: "Hacks", field: "hack_attendances_count", cssClass: 'numeric'},
-     {id: "email", name: "email", field: "email", width: 200},
-     {id: "email_ok", name: "Email ok", field: "email_ok", formatter: 'BooleanFormatter', cssClass: 'centred'},
+     {id: "fullname", name: "Name", field: "fullname", formatter: "ShowLinkTextFormatter", width: 200, sortable: true},
+     {id: "hack_attendances_count", name: "Hacks", field: "hack_attendances_count", cssClass: 'numeric', sortable: true},
+     {id: "email", name: "email", field: "email", width: 200, sortable: true},
+     {id: "email_ok", name: "Email ok", field: "email_ok", formatter: 'BooleanFormatter', cssClass: 'centred', sortable: true},
      {id: "email_issues", name: "Email issues", field: "email_issues", width: 120},
      {id: "tel_combined", name: "Tel. numbers", field: "tel_combined", width: 200},
      {id: "non_hacker", name: "Non hacker?", field: "non_hacker", formatter: 'BooleanFormatter', cssClass: 'centred'}

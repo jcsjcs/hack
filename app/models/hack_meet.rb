@@ -12,12 +12,12 @@ class HackMeet < ActiveRecord::Base
   def self.grid_columns
    [
      {id: "year_month", name: "Month", field: "year_month", formatter: "ShowLinkTextFormatter", width: 200},
-     {id: "hack_date", name: "Date", field: "hack_date", width: 100},
-     {id: "hack_attendances_count", name: "Attendances", field: "hack_attendances_count", formatter: 'HackAttendanceFormatter', width: 150},
-     {id: "start_time", name: "Start", field: "start_time"},
-     {id: "work_area", name: "Work area", field: "work_area", width: 120},
+     {id: "hack_date", name: "Date", field: "hack_date", width: 100, sortable: true},
+     {id: "hack_attendances_count", name: "Attendances", field: "hack_attendances_count", formatter: 'HackAttendanceFormatter', width: 150, sortable: true},
+     {id: "start_time", name: "Start", field: "start_time", sortable: true},
+     {id: "work_area", name: "Work area", field: "work_area", width: 120, sortable: true},
      {id: "notes", name: "Notes", field: "notes", width: 120},
-     {id: "hack_venue", name: "Venue", field: "hack_venue", width: 120},
+     {id: "hack_venue", name: "Venue", field: "hack_venue", width: 120, sortable: true},
      {id: "social", name: "Social", field: "social", formatter: 'BooleanFormatter', cssClass: 'centred'}
    ]
   end
@@ -39,7 +39,7 @@ class HackMeet < ActiveRecord::Base
         ar << {member.informal_name => []}
       else
         gr << {member.group_with.informal_name => member.informal_name}
-      end 
+      end
     end
     gr.each {|g| elem = ar.find {|a| a.keys.include?(g.keys.first) }; elem[g.keys.first] << g.values.first }
     ar = ar.map {|a| [a.keys.first, a.values.first] }.flatten

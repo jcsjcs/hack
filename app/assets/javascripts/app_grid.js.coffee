@@ -18,6 +18,8 @@ class window.AppGrid
       autoEdit: false
       enableTextSelectionOnCells: true
       syncColumnCellResize: true
+      multiColumnSort: true
+
     if @config.show_column
       @columns.push
         id: "show"
@@ -48,14 +50,13 @@ class window.AppGrid
       field: "rn"
       formatter: RowNumberFormatter
       behavior: "select"
-      cssClass: "cell-selection"
       width: 40
       cannotTriggerInsert: true
       resizable: false
       unselectable: true
       sortable: false
       unfiltered: true
-      cssClass: "ui-state-default jqGrid-rownum slk_cell_right_align"
+      cssClass: "cell-selection ui-state-default jqGrid-rownum slk_cell_right_align"
 
     @searchString = ""
 
@@ -95,6 +96,35 @@ class window.AppGrid
       self.grid.render()
 
     columnpicker = new Slick.Controls.ColumnPicker(@columns, @grid, @options)
+
+
+    gridSorter = (sortCols, dataView) ->
+      dataView.sort ((row1, row2) ->
+        i = 0
+        l = sortCols.length
+
+        while i < l
+          field = sortCols[i].sortCol.field
+          sign = (if sortCols[i].sortAsc then 1 else -1)
+          x = row1[field]
+          y = row2[field]
+          result = ((if x < y then -1 else ((if x > y then 1 else 0)))) * sign
+          return result  unless result is 0
+          i++
+        0
+      ), true
+
+    @grid.onSort.subscribe (e, args) ->
+      gridSorter(args.sortCols, self.dataView)
+
+    @dataView.getItemMetadata = (row) ->
+      item = self.dataView.getItem(row)
+      return null  if item is undefined
+      
+      # Get value from row_colour & return as cssClass
+      return cssClasses: item.row_colour  if item.row_colour isnt ""
+      {}
+
 
     # $("##{gridid}").data('slickgrid', @grid)           # Store a ref to the grid
 
