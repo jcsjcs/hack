@@ -36,7 +36,7 @@
               <td>No of hacks</td><td class="numeric"><%= @hack_count %></td>
             </tr>
             <tr>
-              <td>Since</td><td class="numeric"><%= @hack_since.strftime('%d %B %Y') %></td>
+              <td>Since</td><td class="numeric"><%= @hack_since.try(:strftime, '%d %B %Y') %></td>
             </tr>
             <tr>
               <td>Total attendance</td><td class="numeric"><%= @hack_attendance_count %></td>

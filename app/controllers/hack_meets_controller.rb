@@ -31,7 +31,7 @@ class HackMeetsController < ApplicationController
   # GET /hack_meets/new
   def new
     hl = HackMeet.select('hack_leader_id, count(hack_leader_id)').where('hack_leader_id IS NOT NULL').group(:hack_leader_id).order('2 desc').first
-    @hack_meet = HackMeet.new(:hack_date => Date.today, :hack_leader_id => hl.hack_leader_id)
+    @hack_meet = HackMeet.new(:hack_date => Date.today, :hack_leader_id => hl.try(:hack_leader_id))
   end
 
   # GET /hack_meets/1/edit

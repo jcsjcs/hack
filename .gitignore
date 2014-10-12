@@ -19,3 +19,6 @@
 
 .ruby-gemset
 .ruby-version
+
+# Vim editor files
+/tags
