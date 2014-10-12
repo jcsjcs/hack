@@ -30,19 +30,31 @@ class HackMeet < ActiveRecord::Base
     row
   end
 
-  def hack_members_for_newsletter
-    ar = []
-    gr = []
-
-    hack_members.hack_seq.each do |member|
-      if member.group_with_id.nil? || !hack_member_ids.include?(member.group_with_id)
-        ar << {member.informal_name => []}
-      else
-        gr << {member.group_with.informal_name => member.informal_name}
-      end
+  def collect_names(add_to, members)
+    members.each do |member|
+      add_to << member[:name]
+      collect_names(add_to, member[:subnodes])
     end
-    gr.each {|g| elem = ar.find {|a| a.keys.include?(g.keys.first) }; elem[g.keys.first] << g.values.first }
-    ar = ar.map {|a| [a.keys.first, a.values.first] }.flatten
+  end
+
+  # List members in a sentence:
+  # * Alphabetic order.
+  # * Leader listed last.
+  # * Members that should be are grouped together.
+  def hack_members_for_newsletter
+    member_hash = {}
+    hack_members.name_seq.each do | member |
+      member_hash[member.informal_name] = {:name     => member.informal_name,
+                                           :grp_with => member.group_with_id.nil? ? nil : member.group_with.informal_name,
+                                           :subnodes => []}
+    end
+    member_hash.each do |_, item|
+      parent = member_hash[item[:grp_with]]
+      parent[:subnodes] << item if parent
+    end
+    unique_array = member_hash.reject {|_, item| member_hash.has_key? item[:grp_with] }.values
+    ar           = []
+    collect_names(ar, unique_array)
 
     leader = self.hack_leader.informal_name
     if ar.include? leader
