@@ -45,7 +45,7 @@ gem 'web-console'
 
 gem 'quiet_assets', :group => :development
 
-gem 'rack-mini-profiler'
+#gem 'rack-mini-profiler'
 
 gem 'pry-rails'
 gem 'pry-plus', group: :development

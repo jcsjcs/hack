@@ -12,3 +12,4 @@
 //= require slick.rowselectionmodel.js
 //= require slick.headerbuttons.js
 //= require slick.headermenu.js
+//= require ext.headerfilter.js

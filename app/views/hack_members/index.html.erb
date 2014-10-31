@@ -25,7 +25,7 @@
 
   <div class="row">
     <div class="large-12 columns">
-      <div id="memberGrid" style="height:500px;">Loading grid...</div>
+      <div id="memberGrid" class="a_slick_grid" style="height:500px;">Loading grid...</div>
     </div>
   </div>
 
@@ -34,7 +34,7 @@
   <script>
     var data    = <%= @grid_data.html_safe %>;
     var columns = <%= @grid_columns.html_safe %>;
-    var config  = {editUrl: 'hack_members', edit_column: true, destroy_column: true}
+    var config  = {editUrl: 'hack_members'}
 
     var thisGrid = new AppGrid('memberGrid', columns, data, config);
     thisGrid.makeSearchEvents(thisGrid, 'memberGridtxtSearch');

@@ -1,0 +1,48 @@
+th.right_align, td.right_align {
+  text-align: right;
+}
+.numeric {
+  text-align: right;
+}
+.centred {
+  text-align: center;
+}
+
+
+// SlickGrid...
+div.slick-cell a {
+  color: #2ba6cb;
+}
+.ui-widget {
+  font-size: 1em;
+}
+.slk_cell_right_align {
+  text-align: right;
+  padding-right: 4px;
+}
+
+.slick-row.active .slick-cell {
+  background: #E8F154;
+}
+
+/*.context-menu-item.icon-edit             { background-image: url(images/grid_icons/edit.png); } */
+.context-menu-item.icon-edit             { background-image: url(<%= asset_path 'grid_icons/edit.png' %>); }
+/*.context-menu-item.icon-renew            { background-image: url(images/grid_icons/arrow_refresh.png); }*/
+.context-menu-item.icon-renew            { background-image: url(<%= asset_path 'grid_icons/arrow_refresh.png' %>); }
+.context-menu-item.icon-pay            { background-image: url(<%= asset_path 'grid_icons/money_dollar.png' %>); }
+.context-menu-item.icon-view            { background-image: url(<%= asset_path 'grid_icons/view.png' %>); }
+.context-menu-item.icon-delete            { background-image: url(<%= asset_path 'grid_icons/delete.png' %>); }
+.context-menu-item.icon-user            { background-image: url(<%= asset_path 'grid_icons/user_suit.png' %>); }
+
+/* Reset some Bootstrap behaviour that interferes with ContextMenu. */
+.context-menu-item > [class^="icon-"], [class*=" icon-"] {
+ display: inherit; /*inline-block;*/
+ width: inherit; /*14px;*/
+ height: inherit; /*14px;*/
+}
+.slickGridContextMenu {
+  color: inherit;
+  /* background: inherit; */
+  font-weight: normal;
+  padding: 1px 5px;
+}

@@ -11,11 +11,12 @@ class HackMeet < ActiveRecord::Base
 
   def self.grid_columns
    [
-     {id: "year_month", name: "Month", field: "year_month", formatter: "ShowLinkTextFormatter", width: 200},
-     {id: "hack_date", name: "Date", field: "hack_date", width: 100, sortable: true},
-     {id: "hack_attendances_count", name: "Attendances", field: "hack_attendances_count", formatter: 'HackAttendanceFormatter', width: 150, sortable: true},
+     {id: "actions", name: "action", field: "actions", width: 50, sortable: false, formatter: "slickActionCollectionFormatter", unfiltered: true},
+     {id: "year_month", name: "Month", field: "year_month", formatter: "YearMonthFormatter", width: 200, sortable: true},
+     {id: "hack_date", name: "Date", field: "hack_date", width: 120, sortable: true},
+     {id: "hack_attendances_count", name: "Attendance", field: "hack_attendances_count", cssClass: 'numeric', width: 120, sortable: true}, #, formatter: 'HackAttendanceFormatter'
      {id: "start_time", name: "Start", field: "start_time", sortable: true},
-     {id: "work_area", name: "Work area", field: "work_area", width: 120, sortable: true},
+#     {id: "work_area", name: "Work area", field: "work_area", width: 120, sortable: true},
      {id: "notes", name: "Notes", field: "notes", width: 120},
      {id: "hack_venue", name: "Venue", field: "hack_venue", width: 120, sortable: true},
      {id: "social", name: "Social", field: "social", formatter: 'BooleanFormatter', cssClass: 'centred'}
@@ -24,9 +25,17 @@ class HackMeet < ActiveRecord::Base
 
   def to_grid_row
     row = {}
-    (%w{hack_date start_time work_area notes social hack_attendances_count id}).each {|f| row[f] = self.send(f) }
-    row['year_month'] = "#{self.hack_year}: #{self.hack_date.strftime('%B')}"
+    (%w{hack_date start_time notes social hack_attendances_count id}).each {|f| row[f] = self.send(f) }
+    #row['year_month'] = "#{self.hack_year}: #{self.hack_date.strftime('%B')}" # could do this as yyyy-mm & use a formatter. == sortable.
+    row['year_month'] = "#{self.hack_year}-#{self.hack_date.strftime('%m')}" # could do this as yyyy-mm & use a formatter. == sortable.
     row['hack_venue'] = self.hack_venue.to_s
+    row['actions'] = []
+    row['actions'] << {type: "action",body: {prompt_text: "",icon: "view",href: "#{"/hack_meets/#{id}"}",text: "Show",cls: "action_link"}}
+    row['actions'] << {type: "action",body: {prompt_text: "",icon: "edit",href: "#{"/hack_meets/#{id}/edit"}",text: "Edit",cls: "action_link"}}
+    row['actions'] << {type: "separator",}
+    row['actions'] << {type: "action",body: {prompt_text: "",icon: "user",href: "#{"/hack_meets/#{id}/attendance"}",text: "Attendance",cls: "action_link"}}
+    row['actions'] << {type: "separator",}
+    row['actions'] << {type: "action",body: {prompt_text: "Are you sure?",icon: "delete", href: "#{"/hack_meets/#{id}"}",text: "Delete",cls: "action_link", method: "delete"}}
     row
   end
 

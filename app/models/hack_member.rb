@@ -3,7 +3,7 @@ class HackMember < ActiveRecord::Base
   has_many :hack_meets, :through => :hack_attendances
   belongs_to :contact_via, :class_name => 'HackMember'
   belongs_to :group_with,  :class_name => 'HackMember'
-  
+
   scope :hack_seq,      -> {order('hack_attendances_count > 0 DESC, non_hacker, UPPER(surname), first_name') }
   scope :hack_seq_desc, -> {order('hack_attendances_count > 0, non_hacker DESC, UPPER(surname) DESC, first_name DESC') }
   scope :name_seq,      -> {order('UPPER(surname), first_name') }
@@ -13,11 +13,12 @@ class HackMember < ActiveRecord::Base
 
   def self.grid_columns
    [
-     {id: "fullname", name: "Name", field: "fullname", formatter: "ShowLinkTextFormatter", width: 200, sortable: true},
+     {id: "actions", name: "action", field: "actions", width: 50, sortable: false, formatter: "slickActionCollectionFormatter", unfiltered: true},
+     {id: "fullname", name: "Name", field: "fullname", width: 200, sortable: true}, #, formatter: "ShowLinkTextFormatter"
      {id: "hack_attendances_count", name: "Hacks", field: "hack_attendances_count", cssClass: 'numeric', sortable: true},
      {id: "email", name: "email", field: "email", width: 200, sortable: true},
      {id: "email_ok", name: "Email ok", field: "email_ok", formatter: 'BooleanFormatter', cssClass: 'centred', sortable: true},
-     {id: "email_issues", name: "Email issues", field: "email_issues", width: 120},
+     {id: "email_issues", name: "Email issues", field: "email_issues", width: 120, sortable: true},
      {id: "tel_combined", name: "Tel. numbers", field: "tel_combined", width: 200},
      {id: "non_hacker", name: "Non hacker?", field: "non_hacker", formatter: 'BooleanFormatter', cssClass: 'centred'}
    ]
@@ -28,6 +29,11 @@ class HackMember < ActiveRecord::Base
     (%w{hack_attendances_count email email_ok email_issues non_hacker id}).each {|f| row[f] = self.send(f) }
     row['tel_combined'] = self.combined_phone_nos
     row['fullname']     = self.full_name
+    row['actions'] = []
+    row['actions'] << {type: "action",body: {prompt_text: "",icon: "view",href: "#{"/hack_members/#{id}"}",text: "Show",cls: "action_link"}}
+    row['actions'] << {type: "action",body: {prompt_text: "",icon: "edit",href: "#{"/hack_members/#{id}/edit"}",text: "Edit",cls: "action_link"}}
+    row['actions'] << {type: "action",body: {prompt_text: "Are you sure?",icon: "delete", href: "#{"/hack_members/#{id}"}",text: "Delete",cls: "action_link", method: "delete"}}
+
     row
   end
 

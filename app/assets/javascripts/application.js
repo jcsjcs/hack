@@ -14,6 +14,9 @@
 //= require jquery_ujs
 //= require jquery.ui.all
 //= require foundation
+//= require chosen.jquery.min
+//= require jquery.contextMenu
+//= require underscore
 //= require slick
 //= require jquery.colorbox-min
 //= require_tree .

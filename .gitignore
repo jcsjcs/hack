@@ -5,6 +5,7 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 /public/hack_media
 /public/assets
+/public/assets_dev
 
 # Ignore bundler config.
 /.bundle
