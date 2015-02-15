@@ -79,6 +79,14 @@ class HackMeet < ActiveRecord::Base
     self.plant_types.order('name').map {|m| m.name}.to_sentence
   end
 
+  def previous
+    @prev_hack ||= HackMeet.where("hack_date < '#{hack_date}'").order('hack_date DESC').first
+  end
+
+  def next
+    @next_hack ||= HackMeet.where("hack_date > '#{hack_date}'").order('hack_date').first
+  end
+
 private
   def set_year_month
     self.hack_year  = self.hack_date.year

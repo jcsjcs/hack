@@ -3,6 +3,14 @@
     <h1>Hack <%= hack_desc @hack_meet.hack_year, @hack_meet.hack_month %></h1>
   </div>
 </div>
+<div class="row">
+  <div class="large-12 columns">
+    <ul class="button-group round">
+      <li><% unless @hack_meet.previous.nil? -%><%= link_to 'Previous', hack_meet_path(@hack_meet.previous), :class => 'button secondary small' %><% end -%></li>
+      <li><% unless @hack_meet.next.nil? -%><%= link_to 'Next', hack_meet_path(@hack_meet.next), :class => 'button secondary small' %><% end -%></li>
+    </ul>
+  </div>
+</div>
 
 <div class="row">
   <div class="large-12 columns">
