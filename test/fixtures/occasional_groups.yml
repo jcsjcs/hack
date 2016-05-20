@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  description: MyString
+  no_of_attendees: 1
+  notes: MyText
+  references: 
+
+two:
+  description: MyString
+  no_of_attendees: 1
+  notes: MyText
+  references: 

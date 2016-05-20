@@ -1,6 +1,7 @@
 class HackMeet < ActiveRecord::Base
   has_many :hack_members, :through => :hack_attendances
   has_many :hack_attendances
+  has_many :occasional_groups
   belongs_to :hack_venue
   belongs_to :hack_leader, :class_name => 'HackMember', :foreign_key => :hack_leader_id
   has_and_belongs_to_many :plant_types
@@ -14,7 +15,7 @@ class HackMeet < ActiveRecord::Base
      {id: "actions", name: "action", field: "actions", width: 50, sortable: false, formatter: "slickActionCollectionFormatter", unfiltered: true},
      {id: "year_month", name: "Month", field: "year_month", formatter: "YearMonthFormatter", width: 200, sortable: true},
      {id: "hack_date", name: "Date", field: "hack_date", width: 120, sortable: true},
-     {id: "hack_attendances_count", name: "Attendance", field: "hack_attendances_count", cssClass: 'numeric', width: 120, sortable: true}, #, formatter: 'HackAttendanceFormatter'
+     {id: "hack_attendances_count", name: "Attendance", field: "combined_attendance", cssClass: 'numeric', width: 120, sortable: true}, #, formatter: 'HackAttendanceFormatter'
      {id: "start_time", name: "Start", field: "start_time", sortable: true},
 #     {id: "work_area", name: "Work area", field: "work_area", width: 120, sortable: true},
      {id: "notes", name: "Notes", field: "notes", width: 120},
@@ -25,7 +26,7 @@ class HackMeet < ActiveRecord::Base
 
   def to_grid_row
     row = {}
-    (%w{hack_date start_time notes social hack_attendances_count id}).each {|f| row[f] = self.send(f) }
+    (%w{hack_date start_time notes social combined_attendance id}).each {|f| row[f] = self.send(f) }
     #row['year_month'] = "#{self.hack_year}: #{self.hack_date.strftime('%B')}" # could do this as yyyy-mm & use a formatter. == sortable.
     row['year_month'] = "#{self.hack_year}-#{self.hack_date.strftime('%m')}" # could do this as yyyy-mm & use a formatter. == sortable.
     row['hack_venue'] = self.hack_venue.to_s
@@ -85,6 +86,10 @@ class HackMeet < ActiveRecord::Base
 
   def next
     @next_hack ||= HackMeet.where("hack_date > '#{hack_date}'").order('hack_date').first
+  end
+
+  def combined_attendance
+    occasional_groups.sum(:no_of_attendees) + hack_attendances_count
   end
 
 private

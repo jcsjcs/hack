@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140219183032) do
+ActiveRecord::Schema.define(version: 20160520145925) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "hack_attendances", force: true do |t|
     t.integer  "hack_meet_id"
@@ -73,6 +76,17 @@ ActiveRecord::Schema.define(version: 20140219183032) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "occasional_groups", force: true do |t|
+    t.string   "description",     null: false
+    t.integer  "no_of_attendees", null: false
+    t.text     "notes",           null: false
+    t.integer  "hack_meet_id",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "occasional_groups", ["hack_meet_id"], name: "index_occasional_groups_on_hack_meet_id", using: :btree
 
   create_table "plant_types", force: true do |t|
     t.string   "name",       null: false

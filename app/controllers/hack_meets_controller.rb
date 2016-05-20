@@ -14,6 +14,7 @@ class HackMeetsController < ApplicationController
   # GET /hack_meets/1
   # GET /hack_meets/1.json
   def show
+    @occasional_groups = @hack_meet.occasional_groups
     @image_folder = "/hack_media/#{@hack_meet.hack_year}/#{@hack_meet.hack_date.strftime('%Y-%m-%d')}"
     pub_path      = Pathname.new(Rails.root) + 'public'
     image_path    = pub_path + @image_folder.sub('/','')

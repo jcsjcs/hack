@@ -1,0 +1,29 @@
+<%= form_for([@hack_meet, @occasional_group]) do |f| %>
+  <% if @occasional_group.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@occasional_group.errors.count, "error") %> prohibited this occasional_group from being saved:</h2>
+
+      <ul>
+      <% @occasional_group.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :no_of_attendees %><br>
+    <%= f.number_field :no_of_attendees %>
+  </div>
+  <div class="field">
+    <%= f.label :notes %><br>
+    <%= f.text_area :notes %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

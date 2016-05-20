@@ -8,6 +8,7 @@ Hack::Application.routes.draw do
       get 'attendance'
       post 'update_attendance'
     end
+    resources :occasional_groups
   end
 
   resources :plant_types
@@ -56,7 +57,7 @@ Hack::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'

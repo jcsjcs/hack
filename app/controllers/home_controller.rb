@@ -6,7 +6,7 @@ class HomeController < ApplicationController
     if @hack_count > 0
       @hack_cancelled_count  = HackMeet.count(:conditions => 'hack_attendances_count = 0')
       @hack_since            = HackMeet.order('hack_year, hack_month').first.hack_date
-      @hack_attendance_count = HackAttendance.count
+      @hack_attendance_count = HackAttendance.count + OccasionalGroup.sum(:no_of_attendees)
     end
 
     hack_months = HackMeet.all(:select => 'hack_year, hack_month, hack_attendances_count', :order => 'hack_year, hack_month')
