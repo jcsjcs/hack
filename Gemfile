@@ -16,7 +16,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
 #gem 'compass-rails'
-gem "compass-rails", "~> 2.0.alpha.0"
+#gem "compass-rails", "~> 2.0.alpha.0"
+gem "compass-rails", "~> 2.0"
 gem 'zurb-foundation', '~> 4.0.0'
 gem 'foundation-icons-sass-rails'
 
@@ -48,7 +49,7 @@ gem 'quiet_assets', :group => :development
 #gem 'rack-mini-profiler'
 
 gem 'pry-rails'
-gem 'pry-plus', group: :development
+######gem 'pry-plus', group: :development
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

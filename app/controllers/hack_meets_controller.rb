@@ -87,7 +87,12 @@ class HackMeetsController < ApplicationController
     member_ids = params[:attendance_ids]
     # Remove all attendances for this hack
     # Then add all checked members
+    # logger.info ">>> #{@hack_meet}"
+    # logger.info ">>> #{@hack_meet.hack_attendances}"
     @hack_meet.hack_attendances.destroy_all
+    # @hack_meet.hack_attendances.each do |att|
+    #   @hack_meet.att.destroy
+    # end
     member_ids.each do |id|
       mem = HackMember.find(id)
       @hack_meet.hack_attendances.create(:hack_member => mem)

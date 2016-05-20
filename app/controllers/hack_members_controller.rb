@@ -22,7 +22,7 @@ class HackMembersController < ApplicationController
   # GET /hack_members/1
   # GET /hack_members/1.json
   def show
-    @hack_meets  = @hack_member.hack_meets
+    @hack_meets  = @hack_member.hack_meets.order(:hack_date)
   end
 
   # GET /hack_members/new

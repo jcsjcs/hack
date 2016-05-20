@@ -23,3 +23,5 @@
 
 # Vim editor files
 /tags
+
+Gemfile_old.lock

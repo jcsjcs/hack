@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.ui.all
+//= require jquery-ui
 //= require foundation
 //= require chosen.jquery.min
 //= require jquery.contextMenu
