@@ -37,6 +37,7 @@ class HackMeetsController < ApplicationController
 
   # GET /hack_meets/1/edit
   def edit
+    @occasional_groups = @hack_meet.occasional_groups
   end
 
   # POST /hack_meets

@@ -126,55 +126,7 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="large-12 columns">
-        <fieldset>
-          <legend>OccasionalGroups:</legend>
-          <div class="row">
-            <div class="large-12 columns">
-              <%= link_to 'Add', new_hack_meet_occasional_group_path(@hack_meet), :class => 'button primary small' %>
-            </div>
-          </div>
-          <% @occasional_groups.each do |occasional_group| -%>
-            <div class="row">
-              <div class="large-12 columns">
-                <hr>
-              </div>
-              <div class="large-8 columns">
-                <p>
-                <strong>Description:</strong>
-                 <%= occasional_group.description %>
-                </p>
-              </div>
-              <div class="large-2 columns">
-                <p>
-                <strong>Attendance:</strong>
-                 <%= occasional_group.no_of_attendees %>
-                </p>
-              </div>
-              <div class="large-1 columns">
-                <p>
-                <%= link_to 'Edit', edit_hack_meet_occasional_group_path(@hack_meet, occasional_group), :class => 'button secondary small' %>
-                </p>
-              </div>
-              <div class="large-1 columns">
-                <p>
-                <%= link_to 'Delete', [@hack_meet, occasional_group], method: :delete, data: { confirm: 'Are you sure?' }, :class => 'button alert small' %>
-                </p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="large-12 columns">
-                <p>
-                <strong>Notes:</strong>
-                 <%= simple_format occasional_group.notes %>
-                </p>
-              </div>
-            </div>
-           <% end -%>
-        </fieldset>
-      </div>
-    </div>
+    <%= render 'occasional_groups', :for_edit => false %>
 
     <div class="row">
       <div class="large-12 columns">
