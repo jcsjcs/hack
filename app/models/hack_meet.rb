@@ -26,10 +26,11 @@ class HackMeet < ActiveRecord::Base
 
   def to_grid_row
     row = {}
-    (%w{hack_date start_time notes social combined_attendance id}).each {|f| row[f] = self.send(f) }
+    (%w{hack_date start_time notes combined_attendance id}).each {|f| row[f] = self.send(f) }
     #row['year_month'] = "#{self.hack_year}: #{self.hack_date.strftime('%B')}" # could do this as yyyy-mm & use a formatter. == sortable.
     row['year_month'] = "#{self.hack_year}-#{self.hack_date.strftime('%m')}" # could do this as yyyy-mm & use a formatter. == sortable.
     row['hack_venue'] = self.hack_venue.to_s
+    row['social']     = self.social ? 'Y' : 'N'
     row['actions'] = []
     row['actions'] << {type: "action",body: {prompt_text: "",icon: "view",href: "#{"/hack_meets/#{id}"}",text: "Show",cls: "action_link"}}
     row['actions'] << {type: "action",body: {prompt_text: "",icon: "edit",href: "#{"/hack_meets/#{id}/edit"}",text: "Edit",cls: "action_link"}}

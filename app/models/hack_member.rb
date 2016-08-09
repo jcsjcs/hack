@@ -26,9 +26,11 @@ class HackMember < ActiveRecord::Base
 
   def to_grid_row
     row = {}
-    (%w{hack_attendances_count email email_ok email_issues non_hacker id}).each {|f| row[f] = self.send(f) }
+    (%w{hack_attendances_count email email_issues id}).each {|f| row[f] = self.send(f) }
     row['tel_combined'] = self.combined_phone_nos
     row['fullname']     = self.full_name
+    row['email_ok']     = self.email_ok ? 'Y' : 'N'
+    row['non_hacker']   = self.non_hacker ? 'Y' : 'N'
     row['actions'] = []
     row['actions'] << {type: "action",body: {prompt_text: "",icon: "view",href: "#{"/hack_members/#{id}"}",text: "Show",cls: "action_link"}}
     row['actions'] << {type: "action",body: {prompt_text: "",icon: "edit",href: "#{"/hack_members/#{id}/edit"}",text: "Edit",cls: "action_link"}}
